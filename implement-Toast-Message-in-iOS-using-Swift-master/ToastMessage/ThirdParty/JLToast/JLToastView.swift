@@ -1,95 +1,211 @@
-//
-//  JLToastView.swift
-//  ToastMessage
-//
-//  Created by TheAppGuruz-iOS-101 on 17/07/14.
-//  Copyright (c) 2014 TheAppGuruz-iOS-101. All rights reserved.
-//
+/*
+ * JLToastView.swift
+ *
+ *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+ *                    Version 2, December 2004
+ *
+ * Copyright (C) 2013-2015 Su Yeol Jeon
+ *
+ * Everyone is permitted to copy and distribute verbatim or modified
+ * copies of this license document, and changing it is allowed as long
+ * as the name is changed.
+ *
+ *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+ *   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+ *
+ *  0. You just DO WHAT THE FUCK YOU WANT TO.
+ *
+ */
 
 import UIKit
 
-class JLToastView: UIView {
+public let JLToastViewBackgroundColorAttributeName = "JLToastViewBackgroundColorAttributeName"
+public let JLToastViewCornerRadiusAttributeName = "JLToastViewCornerRadiusAttributeName"
+public let JLToastViewTextInsetsAttributeName = "JLToastViewTextInsetsAttributeName"
+public let JLToastViewTextColorAttributeName = "JLToastViewTextColorAttributeName"
+public let JLToastViewFontAttributeName = "JLToastViewFontAttributeName"
+public let JLToastViewPortraitOffsetYAttributeName = "JLToastViewPortraitOffsetYAttributeName"
+public let JLToastViewLandscapeOffsetYAttributeName = "JLToastViewLandscapeOffsetYAttributeName"
 
-    var _backgroundView: UIView?
-    var _textLabel: UILabel?
-    var _textInsets: UIEdgeInsets?
+@objc public class JLToastView: UIView {
+    
+    var backgroundView: UIView!
+    var textLabel: UILabel!
+    var textInsets: UIEdgeInsets!
+    
+    init() {
+        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
-    override init() {
-        super.init(frame: CGRectMake(0, 0, 100, 100))
-        _backgroundView = UIView(frame: self.bounds)
-        _backgroundView!.backgroundColor = UIColor(white: 0, alpha: 0.7)
-        _backgroundView!.layer.cornerRadius = 5
-        _backgroundView!.clipsToBounds = true
-        self.addSubview(_backgroundView!)
+        let userInterfaceIdiom = UIDevice.currentDevice().userInterfaceIdiom
 
-        _textLabel = UILabel(frame: CGRectMake(0, 0, 100, 100))
-        _textLabel!.textColor = UIColor.whiteColor()
-        _textLabel!.backgroundColor = UIColor.clearColor()
-        _textLabel!.font = UIFont.systemFontOfSize(JLToastViewValue.FontSize)
-        _textLabel!.numberOfLines = 0
-        self.addSubview(_textLabel!)
+        self.userInteractionEnabled = false
 
-        _textInsets = UIEdgeInsetsMake(6, 10, 6, 10)
+        self.backgroundView = UIView()
+        self.backgroundView.frame = self.bounds
+        self.backgroundView.backgroundColor = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewBackgroundColorAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as? UIColor
+        self.backgroundView.layer.cornerRadius = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewCornerRadiusAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as! CGFloat
+        self.backgroundView.clipsToBounds = true
+        self.addSubview(self.backgroundView)
+
+        self.textLabel = UILabel()
+        self.textLabel.frame = self.bounds
+        self.textLabel.textColor = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewTextColorAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as? UIColor
+        self.textLabel.backgroundColor = UIColor.clearColor()
+        self.textLabel.font = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewFontAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as! UIFont
+        self.textLabel.numberOfLines = 0
+        self.textLabel.textAlignment = .Center;
+        self.addSubview(self.textLabel)
+
+        self.textInsets = (self.dynamicType.defaultValueForAttributeName(
+            JLToastViewTextInsetsAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as! NSValue).UIEdgeInsetsValue()
     }
-
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    
+    required convenience public init(coder aDecoder: NSCoder) {
+        self.init()
     }
-
+    
     func updateView() {
-        let deviceWidth = UIScreen.mainScreen().bounds.size.width
-        let font = self._textLabel!.font
-        let constraintSize = CGSizeMake(deviceWidth * (280.0 / 320.0), CGFloat(INT_MAX))
-        var textLabelSize = self._textLabel!.sizeThatFits(constraintSize)
-        self._textLabel!.frame = CGRect(
-            x: self._textInsets!.left,
-            y: self._textInsets!.top,
+        let deviceWidth = CGRectGetWidth(UIScreen.mainScreen().bounds)
+        let font = self.textLabel.font
+        let constraintSize = CGSize(width: deviceWidth * (280.0 / 320.0), height: CGFloat.max)
+        var textLabelSize = self.textLabel.sizeThatFits(constraintSize)
+        self.textLabel.frame = CGRect(
+            x: self.textInsets.left,
+            y: self.textInsets.top,
             width: textLabelSize.width,
             height: textLabelSize.height
         )
-        self._backgroundView!.frame = CGRect(
+        self.backgroundView.frame = CGRect(
             x: 0,
             y: 0,
-            width: self._textLabel!.frame.size.width + self._textInsets!.left + self._textInsets!.right,
-            height: self._textLabel!.frame.size.height + self._textInsets!.top + self._textInsets!.bottom
+            width: self.textLabel.frame.size.width + self.textInsets.left + self.textInsets.right,
+            height: self.textLabel.frame.size.height + self.textInsets.top + self.textInsets.bottom
         )
 
         var x: CGFloat
         var y: CGFloat
-        var width: CGFloat
-        var height: CGFloat
-        var angle: CGFloat
+        var width:CGFloat
+        var height:CGFloat
 
-        switch UIApplication.sharedApplication().statusBarOrientation {
-            case UIInterfaceOrientation.PortraitUpsideDown:
-                width = self._backgroundView!.frame.size.width
-                height = self._backgroundView!.frame.size.height
-                x = (UIScreen.mainScreen().bounds.size.width - width) / 2
-                y = JLToastViewValue.PortraitOffsetY
+        let screenSize = UIScreen.mainScreen().bounds.size
+        let backgroundViewSize = self.backgroundView.frame.size
 
-            case UIInterfaceOrientation.LandscapeRight:
-                width = self._backgroundView!.frame.size.height
-                height = self._backgroundView!.frame.size.width
-                x = (UIScreen.mainScreen().bounds.size.width - height) / 2;
-                y = UIScreen.mainScreen().bounds.size.height - width - JLToastViewValue.LandscapeOffsetY
+        let orientation = UIApplication.sharedApplication().statusBarOrientation
+        let systemVersion = (UIDevice.currentDevice().systemVersion as NSString).floatValue
 
-            case UIInterfaceOrientation.LandscapeLeft:
-                width = self._backgroundView!.frame.size.height
-                height = self._backgroundView!.frame.size.width
-                x = (UIScreen.mainScreen().bounds.size.width - height) / 2;
-                y = UIScreen.mainScreen().bounds.size.height - width - JLToastViewValue.LandscapeOffsetY
+        let userInterfaceIdiom = UIDevice.currentDevice().userInterfaceIdiom
+        let portraitOffsetY = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewPortraitOffsetYAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as! CGFloat
+        let landscapeOffsetY = self.dynamicType.defaultValueForAttributeName(
+            JLToastViewLandscapeOffsetYAttributeName,
+            forUserInterfaceIdiom: userInterfaceIdiom
+        ) as! CGFloat
 
-            default:
-                width = self._backgroundView!.frame.size.width
-                height = self._backgroundView!.frame.size.height
-                x = (UIScreen.mainScreen().bounds.size.width - width) / 2
-                y = UIScreen.mainScreen().bounds.size.height - height - JLToastViewValue.PortraitOffsetY
+        if UIInterfaceOrientationIsLandscape(orientation) && systemVersion < 8.0 {
+            width = screenSize.height
+            height = screenSize.width
+            y = landscapeOffsetY
+        } else {
+            width = screenSize.width
+            height = screenSize.height
+            if UIInterfaceOrientationIsLandscape(orientation) {
+                y = landscapeOffsetY
+            } else {
+                y = portraitOffsetY
+            }
         }
 
-        self.frame = CGRectMake(x, y, width, height);
+        x = (width - backgroundViewSize.width) * 0.5
+        y = height - (backgroundViewSize.height + y)
+        self.frame = CGRect(x: x, y: y, width: backgroundViewSize.width, height: backgroundViewSize.height);
+    }
+    
+    override public func hitTest(point: CGPoint, withEvent event: UIEvent!) -> UIView? {
+        if let superview = self.superview {
+            let pointInWindow = self.convertPoint(point, toView: self.superview)
+            let contains = CGRectContainsPoint(self.frame, pointInWindow)
+            if contains && self.userInteractionEnabled {
+                return self
+            }
+        }
+        return nil
     }
 
-    override func hitTest(point: CGPoint, withEvent event: UIEvent!) -> UIView? {
-        return nil
+}
+
+public extension JLToastView {
+    private struct Singleton {
+        static var defaultValues: [String: [UIUserInterfaceIdiom: AnyObject]] = [
+            // backgroundView.color
+            JLToastViewBackgroundColorAttributeName: [
+                .Unspecified: UIColor(white: 0, alpha: 0.7)
+            ],
+
+            // backgroundView.layer.cornerRadius
+            JLToastViewCornerRadiusAttributeName: [
+                .Unspecified: 5
+            ],
+
+            JLToastViewTextInsetsAttributeName: [
+                .Unspecified: NSValue(UIEdgeInsets: UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10))
+            ],
+
+            // textLabel.textColor
+            JLToastViewTextColorAttributeName: [
+                .Unspecified: UIColor.whiteColor()
+            ],
+
+            // textLabel.font
+            JLToastViewFontAttributeName: [
+                .Unspecified: UIFont.systemFontOfSize(12),
+                .Phone: UIFont.systemFontOfSize(12),
+                .Pad: UIFont.systemFontOfSize(16),
+            ],
+
+            JLToastViewPortraitOffsetYAttributeName: [
+                .Unspecified: 30,
+                .Phone: 30,
+                .Pad: 60,
+            ],
+            JLToastViewLandscapeOffsetYAttributeName: [
+                .Unspecified: 20,
+                .Phone: 20,
+                .Pad: 40,
+            ],
+        ]
+    }
+
+    class func defaultValueForAttributeName(attributeName: String,
+                                            forUserInterfaceIdiom userInterfaceIdiom: UIUserInterfaceIdiom)
+                                            -> AnyObject {
+        let valueForAttributeName = Singleton.defaultValues[attributeName]!
+        if let value: AnyObject = valueForAttributeName[userInterfaceIdiom] {
+            return value
+        }
+        return valueForAttributeName[.Unspecified]!
+    }
+
+    class func setDefaultValue(value: AnyObject,
+                               forAttributeName attributeName: String,
+                               userInterfaceIdiom: UIUserInterfaceIdiom) {
+        var values = Singleton.defaultValues[attributeName]!
+        values[userInterfaceIdiom] = value
+        Singleton.defaultValues[attributeName] = values
     }
 }

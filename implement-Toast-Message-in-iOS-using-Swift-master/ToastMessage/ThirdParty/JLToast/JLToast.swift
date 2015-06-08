@@ -4,7 +4,7 @@
  *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
  *                    Version 2, December 2004
  *
- * Copyright (C) 2013-2014 Su Yeol Jeon
+ * Copyright (C) 2013-2015 Su Yeol Jeon
  *
  * Everyone is permitted to copy and distribute verbatim or modified
  * copies of this license document, and changing it is allowed as long
@@ -101,7 +101,7 @@ public struct JLToastDelay {
         dispatch_async(dispatch_get_main_queue(), {
             self.view.updateView()
             self.view.alpha = 0
-            UIApplication.sharedApplication().keyWindow?.subviews.first?.addSubview(self.view)
+            UIApplication.sharedApplication().windows.first?.addSubview(self.view)
             UIView.animateWithDuration(
                 0.5,
                 delay: self.delay,

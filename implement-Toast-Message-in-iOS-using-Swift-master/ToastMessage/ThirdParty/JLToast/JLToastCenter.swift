@@ -4,7 +4,7 @@
  *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
  *                    Version 2, December 2004
  *
- * Copyright (C) 2013-2014 Su Yeol Jeon
+ * Copyright (C) 2013-2015 Su Yeol Jeon
  *
  * Everyone is permitted to copy and distribute verbatim or modified
  * copies of this license document, and changing it is allowed as long
@@ -49,7 +49,7 @@ import UIKit
     
     func deviceOrientationDidChange(sender: AnyObject?) {
         if self._queue.operations.count > 0 {
-            let lastToast: JLToast = _queue.operations[0] as JLToast
+            let lastToast: JLToast = _queue.operations[0] as! JLToast
             lastToast.view.updateView()
         }
     }

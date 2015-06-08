@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CE1E5A81B25988F00FF6034 /* JLToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1E5A51B25988F00FF6034 /* JLToast.swift */; };
+		4CE1E5A91B25988F00FF6034 /* JLToastCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1E5A61B25988F00FF6034 /* JLToastCenter.swift */; };
+		4CE1E5AA1B25988F00FF6034 /* JLToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1E5A71B25988F00FF6034 /* JLToastView.swift */; };
 		80F1FB6D1977A11A0063C470 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80F1FB6B1977A11A0063C470 /* Main.storyboard */; };
 		80F1FB6F1977A11A0063C470 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80F1FB6E1977A11A0063C470 /* Images.xcassets */; };
 		80F1FB7B1977A11A0063C470 /* ToastMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F1FB7A1977A11A0063C470 /* ToastMessageTests.swift */; };
 		80F1FB8D1977A24E0063C470 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F1FB851977A24E0063C470 /* AppDelegate.swift */; };
-		80F1FB8E1977A24E0063C470 /* JLToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F1FB881977A24E0063C470 /* JLToast.swift */; };
-		80F1FB8F1977A24E0063C470 /* JLToastCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F1FB891977A24E0063C470 /* JLToastCenter.swift */; };
-		80F1FB901977A24E0063C470 /* JLToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F1FB8A1977A24E0063C470 /* JLToastView.swift */; };
 		80F1FB911977A24E0063C470 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F1FB8C1977A24E0063C470 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4CE1E5A41B25988F00FF6034 /* JLToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLToast.h; sourceTree = "<group>"; };
+		4CE1E5A51B25988F00FF6034 /* JLToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToast.swift; sourceTree = "<group>"; };
+		4CE1E5A61B25988F00FF6034 /* JLToastCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToastCenter.swift; sourceTree = "<group>"; };
+		4CE1E5A71B25988F00FF6034 /* JLToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToastView.swift; sourceTree = "<group>"; };
 		80F1FB621977A11A0063C470 /* ToastMessage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToastMessage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80F1FB661977A11A0063C470 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80F1FB6C1977A11A0063C470 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -36,9 +40,6 @@
 		80F1FB791977A11A0063C470 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80F1FB7A1977A11A0063C470 /* ToastMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageTests.swift; sourceTree = "<group>"; };
 		80F1FB851977A24E0063C470 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		80F1FB881977A24E0063C470 /* JLToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToast.swift; sourceTree = "<group>"; };
-		80F1FB891977A24E0063C470 /* JLToastCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToastCenter.swift; sourceTree = "<group>"; };
-		80F1FB8A1977A24E0063C470 /* JLToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JLToastView.swift; sourceTree = "<group>"; };
 		80F1FB8C1977A24E0063C470 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,9 +136,10 @@
 		80F1FB871977A24E0063C470 /* JLToast */ = {
 			isa = PBXGroup;
 			children = (
-				80F1FB881977A24E0063C470 /* JLToast.swift */,
-				80F1FB891977A24E0063C470 /* JLToastCenter.swift */,
-				80F1FB8A1977A24E0063C470 /* JLToastView.swift */,
+				4CE1E5A41B25988F00FF6034 /* JLToast.h */,
+				4CE1E5A51B25988F00FF6034 /* JLToast.swift */,
+				4CE1E5A61B25988F00FF6034 /* JLToastCenter.swift */,
+				4CE1E5A71B25988F00FF6034 /* JLToastView.swift */,
 			);
 			path = JLToast;
 			sourceTree = "<group>";
@@ -249,11 +251,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CE1E5A91B25988F00FF6034 /* JLToastCenter.swift in Sources */,
 				80F1FB911977A24E0063C470 /* ViewController.swift in Sources */,
-				80F1FB901977A24E0063C470 /* JLToastView.swift in Sources */,
 				80F1FB8D1977A24E0063C470 /* AppDelegate.swift in Sources */,
-				80F1FB8E1977A24E0063C470 /* JLToast.swift in Sources */,
-				80F1FB8F1977A24E0063C470 /* JLToastCenter.swift in Sources */,
+				4CE1E5A81B25988F00FF6034 /* JLToast.swift in Sources */,
+				4CE1E5AA1B25988F00FF6034 /* JLToastView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +443,7 @@
 				80F1FB801977A11A0063C470 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		80F1FB811977A11A0063C470 /* Build configuration list for PBXNativeTarget "ToastMessageTests" */ = {
 			isa = XCConfigurationList;
@@ -449,6 +452,7 @@
 				80F1FB831977A11A0063C470 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
